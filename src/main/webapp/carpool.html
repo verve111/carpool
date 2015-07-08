@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>carpool, мои поездки</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Просмотр зарегистрированных поездок (carpool) пользователя">
+<meta name="keywords" content="carpoputi, просмотр поездок, авто попутчик, попутное авто, поиск попутки, ищу попутку, carpool, подвезти на машине">
+<meta name="author" content="Pipolo solutions">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+<link href="assets/css/custom.css" rel="stylesheet">
+<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="assets/ico/favicon.ico">
+</head>
+
+<body>
+	<div id="routeSuccesToast" class="successToast" style="display:none;"></div>
+	<!-- facebook, vk -->
+	<div id="pageheaderid"></div>
+	<!-- Green header -->
+	<div class="row poputiHeader" style="margin:0px;">
+		<div class="col-lg-2 col-md-1">
+		</div>
+		<div class="col-md-8">
+			<img src="images/auto-poputchik.png" title="Авто попутчик" alt="Поиск авто попутчика" style="padding-top:8px;" width="260"></img>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+	<!-- navbar-fixed-top navbar-inverse-->
+	<nav class="navbar-default navbar " >
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-collapse">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<div class="navbar-collapse collapse">
+			<div class="row">
+				<div class="col-lg-1 col-md-0"></div>
+				<div class="col-lg-5 col-md-8">
+					<ul class="nav navbar-nav" id="mainTabBar">
+						<li id="liMainTab"><a href="#" class="menulink" rel="auto-poputchik.html">Главная</a></li>
+						<li id="liFound"><a href="#" class="menulink" rel="ishu-poputku.html">Поиск попутки</a></li>								
+						<li id="liVoditel" class="dropdown custom-active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Водителю <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="menulink" rel="podvezti-na-mashine.html">Зарегистрировать поездку</a></li>
+								<li><a href="#" class="menulink" rel="carpool.html">Мои поездки</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-5 col-md-4">
+					<ul class="nav navbar-nav pull-right">
+						<li id="liEnter" style="display:none;"><a href="#" class="menulink navbar-link" rel="loginpage.html"> <i class='glyphicon glyphicon-user'></i>&nbsp;&nbsp;Войти</a></li>
+						<li id="liLogout"style="display:none;"><a href="#" class="menulink navbar-link" rel="auto-poputchik.html?logout=1" title="Выйти из системы">Выход <i class="glyphicon glyphicon-log-out"></i></a></li>
+					</ul>
+				</div>
+
+				<div class="col-lg-1 col-md-0"></div>
+			</div>
+		</div>
+	</nav>		
+<!--------- Main body --------------->		
+	<div class="container">
+		<div class="jumbotron">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h1 class="panel-title">carpool, мои поездки</h1>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive" style="margin: 5px 0px;">
+						<table class="table table-bordered table-striped table-hover table-condensed" id="regTable">
+							<thead align='center'>
+								<tr>
+									<th>Дата создания</th>
+									<th>Из</th>
+									<th>В</th>
+									<th>Дата отъезда</th>
+									<th>Эл.почта</th>
+									<th>Тел.</th>
+									<th>Цена за место</th>
+									<th>Действия</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>				
+				</div>
+			</div>	
+			<div style="padding-bottom: 60px;">
+				<a href="auto-poputchik.html" title="Перейти на главную страницу">&laquo; На главную страницу</a>
+			</div>					
+		</div>
+		<hr>
+		<footer id="pagefooterid">
+		</footer>
+	</div>
+	
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/js/jquery-1.10.1.min.js"></script>
+	<script src="assets/js/login.js"></script>
+	<script>
+  		$("div#pageheaderid").load("html/header.html"); 
+  		$("footer#pagefooterid").load("html/footer.html");
+	</script> 
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="assets/js/jquery.ui.datepicker-ru.js"></script>
+	<!-- modal windows -->
+	<script src="assets/js/bootbox.min.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var params = getQueryParams(document.location.search);
+			if (params.route_created && isLoggedIn()) {
+				showToast("Поездка успешно зарегистрирована");
+			}
+			if (isLoggedIn()) {
+				refreshRoutesTable();
+			}
+			if (!isLoggedIn()) {
+				window.location.href = 'loginpage.html?form_type=carpool';
+			}
+		})
+	</script>
+</body>
+</html>				

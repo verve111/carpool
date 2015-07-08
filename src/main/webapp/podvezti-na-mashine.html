@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Подвезти на машине</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Подвезти на машине. Зарегистрировать поездку, чтобы пассажиры смогли вас найти.">
+<meta name="keywords" content="подвезти на машине, авто попутчик, попутное авто, поиск попутки, ищу попутку, carpool">
+<meta name="author" content="Pipolo solutions">
+
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+<link href="assets/css/custom.css" rel="stylesheet">
+<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="assets/css/bootstrap-formhelpers.min.css" rel="stylesheet">
+<link href="assets/css/tooltipster.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="assets/ico/favicon.ico">
+  
+</head>
+
+<body>
+	<!-- facebook, vk -->
+	<div id="pageheaderid"></div>
+	<!-- Green header -->
+	<div class="row poputiHeader" style="margin:0px;">
+		<div class="col-lg-2 col-md-1">
+		</div>
+		<div class="col-md-8">
+			<img src="images/auto-poputchik.png" title="Авто попутчик" alt="Поиск авто попутчика" style="padding-top:8px;" width="260"></img>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+	<!-- navbar-fixed-top navbar-inverse-->
+	<nav class="navbar-default navbar " >
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-collapse">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<div class="navbar-collapse collapse">
+			<div class="row">
+				<div class="col-lg-1 col-md-0"></div>
+				<div class="col-lg-5 col-md-8">
+					<ul class="nav navbar-nav" id="mainTabBar">
+						<li id="liMainTab"><a href="#" class="menulink" rel="auto-poputchik.html">Главная</a></li>
+						<li id="liFound"><a href="#" class="menulink" rel="ishu-poputku.html">Поиск попутки</a></li>								
+						<li id="liVoditel" class="dropdown custom-active"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Водителю <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="menulink" rel="podvezti-na-mashine.html">Зарегистрировать поездку</a></li>
+								<li><a href="#" class="menulink" rel="carpool.html">Мои поездки</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-5 col-md-4">
+					<ul class="nav navbar-nav pull-right">
+						<li id="liEnter" style="display:none;"><a href="#" class="menulink navbar-link" rel="loginpage.html"> <i class='glyphicon glyphicon-user'></i>&nbsp;&nbsp;Войти</a></li>
+						<li id="liLogout"style="display:none;"><a href="#" class="menulink navbar-link" rel="auto-poputchik.html?logout=1" title="Выйти из системы">Выход <i class="glyphicon glyphicon-log-out"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-lg-1 col-md-0"></div>
+			</div>
+		</div>
+	</nav>	
+<!--------- Main body --------------->		
+	<div class="container" id="foundRoutesTab">
+		<div class="jumbotron">
+			<div class="panel panel-default otkudaKudaBack">
+				<div class="panel-heading">
+					<h1 class="panel-title">Подвезти на машине: создать поездку</h1>
+				</div>
+				<form id="regRouteForm" class="form-horizontal">
+					<fieldset>
+						<div class="form-group marginTop40">
+							<label for="regComboFrom" class="col-md-3 control-label fontColorGrey">Откуда*</label>
+							<div class="col-md-4">
+								<select class="form-control" id="regComboFrom" name="regComboFrom">
+								</select>
+							</div>
+						</div>
+						<div class="form-group" id="addCityThroughAnchor">
+							<div class="col-md-3"></div>
+							<div class="col-md-4">
+								<button class="btn btn-default" id="addCityThrough"
+									type="button"
+									title="Добавление города, через который вы поедете, дает возможность найти вас тем, кто ищет автопутку из этого города. Пример: вы едете из Москвы в Санкт-Петербург через Псков, попутчики которые хотели бы ехать из Пскова в Санкт-Петербург смогут найти ваш маршрут и связаться с вами.">
+									<span class="fontColorGrey">Через город&nbsp;&nbsp;</span>
+									<i class="glyphicon glyphicon-plus-sign iconcolor-grey"></i>
+								</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="regComboTo" class="col-md-3 control-label fontColorGrey">Куда*</label>
+							<div class="col-md-4">
+								<select class="form-control" id="regComboTo" name="regComboTo">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="regDatepicker" class="col-md-3 control-label fontColorGrey">Дата отъезда*</label>
+							<div class="col-md-3">
+								<!-- <div class="input-group">-->
+									<input type="text" id="regDatepicker" name="regDatepicker"
+										class="form-control" placeholder="Клик для выбора">
+								<!--</div>-->
+							</div>
+							<label for="regTimepicker" 
+								class="col-md-3 control-label fontColorGrey">Время отъезда*</label>
+							<div class="col-md-2">
+								<div class="bfh-timepicker" data-time="09:00">
+									<div class="input-group bfh-timepicker-toggle"
+										data-toggle="bfh-timepicker">
+										<span class="input-group-addon"><i
+											class="glyphicon glyphicon-time fontColorGrey"></i></span> 
+											<input type="text" class="form-control" id="regTimepicker" name="regTimepicker">
+									</div>
+									<div class="bfh-timepicker-popover">
+										<table class="table">
+											<tbody>
+												<tr>
+													<td class="hour"><a class="next" href="#"><i
+															class="glyphicon glyphicon-chevron-up"></i></a><br> <input
+														type="text" readonly><br> <a
+														class="previous" href="#"><i
+															class="glyphicon glyphicon-chevron-down"></i></a></td>
+													<td class="separator">:</td>
+													<td class="minute"><a class="next" href="#"><i
+															class="glyphicon glyphicon-chevron-up"></i></a><br> <input
+														type="text" readonly><br> <a
+														class="previous" href="#"><i
+															class="glyphicon glyphicon-chevron-down"></i></a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="regMesta" class="col-md-3 control-label fontColorGrey">Кол-во мест <i class="glyphicon glyphicon-question-sign" title="Количество человек, которых вы можете взять"></i></label>
+							<div class="col-md-2">
+								<select class="form-control" id="regMesta" name="regMesta">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="regDopInfo" class="col-md-3 control-label fontColorGrey">Доп. информация</label>
+							<div class="col-md-6">
+								<textarea id="regDopInfo" class="form-control" rows="3" maxlength="255" placeholder="В этом поле можно указать место встречи, кол-во багажа, информацию об авто и прочее."></textarea>
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<label for="regDriverName" class="col-md-3 control-label fontColorGrey">Имя водителя</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" maxlength="64" id="regDriverName" name="regDriverName">
+								</input>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="regEmail" class="col-md-3 control-label fontColorGrey">Email</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" maxlength="64" id="regEmail" name="regEmail"
+								 placeholder="Email для связи с вами">
+								</input>
+							</div>
+							<div class="col-md-5">
+								<span class="fontColorGrey">Ограничить видимость</span>
+								<input type="checkbox" checked id="regCheckboxEmail">&nbsp;&nbsp;</input>
+								<i class="glyphicon glyphicon-question-sign" title="Только зарегистрированные пользователи смогут увидеть ваш электронный адрес и связаться с вами для участия в поездке. Данная информация останется конфиденциальной."></i>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="regPhone" class="col-md-3 control-label fontColorGrey">Телефон</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" maxlength="16" id="regPhone" name="regPhone" placeholder="Тел. для связи с вами">
+								</input>
+							</div>
+							<div class="col-md-5">
+								<span class="fontColorGrey">Ограничить видимость</span>
+								<input type="checkbox" checked id="regCheckboxPhone">&nbsp;&nbsp;</input>
+								<i class="glyphicon glyphicon-question-sign" title="Только зарегистрированные пользователи смогут увидеть ваш номер телефона и связаться с вами для участия в поездке. Данная информация останется конфиденциальной."></i>
+							</div>
+						</div>					
+						<div class="form-group">
+							<label for="regPrice" class="col-md-3 control-label fontColorGrey">Цена за место <i class="glyphicon glyphicon-question-sign iconcolor-lightgrey" title="Укажите цену проезда на одного человека в рублях"></i></label>
+							<div class="col-md-2">
+								<input type="text" class="form-control" maxlength="5" id="regPrice" name="regPrice">
+								</input>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-3"></div>
+							<div class="col-md-4">
+								<button type="submit" id="createRoute"
+									class="btn btn-success btn-large">Создать &raquo;</button>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div style="padding-bottom: 60px;">
+				<a href="auto-poputchik.html" title="Перейти на главную страницу">&laquo; На главную страницу</a>
+			</div>							
+		</div>
+		<hr>
+		<footer id="pagefooterid">
+		</footer>
+	</div>
+	
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/js/jquery-1.10.1.min.js"></script>
+	<script src="assets/js/login.js"></script>	
+	<script>
+  		$("div#pageheaderid").load("html/header.html"); 
+  		$("footer#pagefooterid").load("html/footer.html");
+	</script> 
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="assets/js/jquery.ui.datepicker-ru.js"></script>
+	<script src="assets/js/jquery.validate.min.js"></script>
+	<script src="assets/js/jquery.tooltipster.min.js"></script>
+	<script src="assets/js/bootstrap-formhelpers-timepicker.js"></script>
+	<!-- modal windows -->
+	<script src="assets/js/bootbox.min.js"></script>	
+	<script src="assets/js/main.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			if (!isLoggedIn()) {
+				window.location.href = 'loginpage.html?form_type=podvezti-na-mashine';
+			}
+			
+			//cities list load
+			initCombos('#regComboFrom, #regComboTo');
+			
+			$( "#regDatepicker" ).datepicker(); 
+			
+			// Kol-vo mest combo
+			var hoursStr = "";
+			for (var j = 1; j <= 5; j++) {
+				hoursStr += "<option value='" + j + "'>" + j + "</option>";
+			}
+			$('#regMesta').append(hoursStr);
+			
+			// Dynamic combo adder component (through cities picker form)
+			var citiesList = window.sessionStorage.getItem('citiesList'); 
+			if (citiesList) {
+			    $("#addCityThrough").click(function() {
+			    	var me = this;
+			    	var counter = 1;
+					$.each($("select[id^='throughCity_']"), function(index, element) {
+						counter = ++element.id[element.id.length - 1];
+					});	
+			        var comboId = "throughCity_" + counter;
+			        var fieldWrapper = $("<div class=\"form-group\"></div>");
+			        var fLabel = $("<label for='" + comboId + "' class='col-md-3 control-label fontColorGrey'>Через</label>");
+			        var fCombo = $("<div class='col-md-4'><select class='form-control' id='" + comboId + "'>" + citiesList + "</select></div>");
+			        var removeButton = $("<div class='col-xs-3 col-sm-3'><button class='btn btn-default btn-xs' title='Убрать город'>Убрать город</button></div>"); 
+			        removeButton.click(function() {
+			        	$(me).removeAttr('disabled');
+			            $(this).parent().remove();
+			        });
+			        fieldWrapper.append(fLabel);
+			        fieldWrapper.append(fCombo);
+			        fieldWrapper.append(removeButton);
+			        $("#addCityThroughAnchor").before(fieldWrapper);
+			        if ($("select[id^='throughCity_']").length > 2) {
+			        	$(me).attr('disabled', 'disabled');
+			        }
+			    });				
+			}
+			
+			// validation
+			jQuery.validator.addMethod("checkEmailAndPhone", function(value, element, params) {
+				return value != '' || $("#regEmail").val() != '';
+			}, jQuery.validator.format("Пожалуйста, укажите ваш email или телефон, чтобы с вами можно было связаться попутчику"));
+		    
+			$('#regRouteForm select, #regRouteForm input[type="text"]').tooltipster({
+				trigger : 'custom',
+				onlyOne : false,
+				position : 'bottom',
+				theme : '.tooltipster-custom-theme'
+			});
+			
+			$("#regRouteForm").validate({
+				submitHandler : function() {
+					var throughCities = "";
+					$.each($("[id^='throughCity_']"), function(index, element) {
+						throughCities += $(element).val() + ",";
+					});
+					if (throughCities.length > 0) {
+						throughCities = throughCities.substr(0, throughCities.length - 1);
+					}
+					var posting = $.post('create.route.json', {
+						regComboFrom : $("#regComboFrom").val(),
+						throughCities : throughCities,
+						regComboTo : $("#regComboTo").val(),
+						regDatepicker : $("#regDatepicker").val(),
+						regTimepicker : $("#regTimepicker").val(),
+						regMesta : $("#regMesta").val(),
+						regDopInfo : $("#regDopInfo").val(),
+						regDriverName : $("#regDriverName").val(),
+						regEmail : $("#regEmail").val(),
+						regCheckboxEmail : $("#regCheckboxEmail").prop('checked'),
+						regPhone : $("#regPhone").val(),
+						regCheckboxPhone : $("#regCheckboxPhone").prop('checked'),
+						regPrice : $("#regPrice").val()
+					});
+					posting.done(function(data) {
+						if (data == 'true') {
+							window.location.href = 'carpool.html?route_created=1';
+						} else if (data == 'false') {
+							showAlert(null, "В день можно создавать не больше 5 поездок. Пожалуйста, попоробуйте завтра.");
+						} else {
+							alert('something went wrong');
+						}
+					});
+				},
+				showErrors : function(errorMap, errorList) {
+					animateValidationErrors(this, errorList);
+				},
+				rules : {
+					regDatepicker : {
+						//datepicker valid() run in defaults onSelect
+						required : true
+					},
+					regComboFrom : {
+						required : true
+					},
+					regComboTo : {
+						required : true
+					},
+					regEmail : {
+						email : true
+					},
+					regPhone : {
+						checkEmailAndPhone : true
+					}
+				},
+				messages : {
+					regDatepicker : {
+						required : 'Выберите дату'
+					},
+					regComboFrom : {
+						required : 'Выберите город'
+					},
+					regComboTo : {
+						required : 'Выберите город'
+					},
+					regEmail : {
+						email : 'Введите правильный email'
+					}
+				}
+			});
+			
+		});
+	</script>
+</body>
+</html>		

@@ -1,0 +1,221 @@
+@font-face { font-family: Enriqueta; src: url(../font/Enriqueta-Regular.otf); } 
+@font-face { font-family: Enriqueta; font-weight: bold; src: url(../font/Enriqueta-Bold.otf);}
+ 
+
+body {
+	padding-bottom: 40px;
+}
+
+.poputiHeader { 
+    background: #5AD048;
+	/*background : #00AEED;*/
+    /*background-image: -webkit-linear-gradient(#6BF356, #5AD048);
+	background-image: -moz-linear-gradient(#6BF356, #5AD048);
+	background-image: linear-gradient(#6BF356, #5AD048);*/
+
+	height: 70px;
+}
+
+.navbar {
+  min-height: 30px !important;
+}
+
+h1 {
+	font-size: 16px  !important;
+	line-height: 1.4em !important;
+
+}
+
+.poputiHeaderText {
+	font-size:30px;
+	/*font-weight: 200;*/
+	color: #5a5a5a;
+	font-family: 'Enriqueta', 'proxima nova','Helvetica Neue',Helvetica,sans-serif;
+	letter-spacing: -1px;
+	text-shadow: white 0px 0px 15px;
+	position: relative;
+	top: -4px;
+	left: 5px;
+  );
+}
+
+.poputiHeaderTextWhite {
+	color: white;
+}
+
+.brightBlue {
+	color : #03b4ea;
+}
+
+.fontColorGrey {
+	color: #6a7480;
+}
+
+.iconcolor-grey {
+	color: #6a7480 !important;
+}
+
+.iconcolor-lightgrey {
+	color: #bbb;
+}
+
+.fontColorGreen {
+	color: #5AD048;;
+}
+
+.fontWeightNormal {
+	font-weight: normal;
+}
+
+.fontColorBlack {
+	color: rgb(51,51,51);
+}
+
+/*.icon-automobile-car {
+	font-size : 40px;
+	color: white;
+	text-shadow: white 0px 0px 25px;
+	position: relative;
+	top: 7px;
+}*/
+
+.lightGrey {
+	color: #999;
+}
+
+.marginBottom40 {
+	margin-bottom: 40px;
+}
+
+.marginTop40 {
+	margin-top: 40px;
+}
+
+.custom-active {
+	/*border-bottom: 2px solid #dd4b39;*/
+	border-bottom: 2px solid #FF8000;
+}
+
+.otkudaKudaBack {
+	background: url(../../images/squairy_light.png) repeat 0 0;
+}
+
+.ui-datepicker .ui-datepicker-calendar{
+   background-color: white;
+}
+.jumbotron {
+   background-color: #fff;
+   padding-top: 10px;
+   margin-bottom: 0px;
+   padding-bottom: 0px;
+   font-size: 16px; /*otkuda kuda labels font size*/
+}
+
+.text-justify {
+	text-align: justify;
+}
+
+.navbar-inner {
+    min-height: 30px;  
+}
+
+/* validation error*/
+select.error, input[type=text].error {
+	border: 1px solid #b94a48 !important;
+	/*background-color: #fee;*/
+}
+
+.tooltipster-custom-theme {
+	border-radius: 5px; 
+	border: 2px solid #b94a48;
+	background: #fee;
+	color: rgb(51,51,51);
+}
+
+.tooltipster-custom-theme .tooltipster-content {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 8px 10px;
+}
+
+.successToast {
+	margin: 10px 0 0 0;
+	font-size: 1em;
+	display: block;
+	/*background-color: #fcf8e3;
+	color: #c09853;*/
+	border: 1px solid #999;
+	padding: 10px 10px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	/*text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);*/
+	box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+	color: #eee;
+	opacity: 0.8;
+	background-color: #333;
+	/*background-color: #d9edf7;
+	border-color: #bce8f1;*/
+	position: absolute;
+	z-index: 9999;
+	width: 20%;
+	min-width: 200px;
+	left: 40%;
+	top: 20%;
+	line-height: 1.2em;
+}
+
+.table thead th {
+	background-color: rgba(141, 192, 219, 0.25);
+	font-size: 13px;
+}
+
+.table-bordered {
+	border: 1px solid #dddddd;
+	border-left: 0;
+
+}
+
+.table-bordered td {
+    border-left: 1px solid #dddddd;
+    font-size: 13px;
+}
+
+.benefits i {
+    border-radius: 50% 50% 50% 50%;
+    color: #fff;
+    font-size: 2em;
+    padding: 16px 18px 20px;
+}
+
+
+.space ul {
+	list-style:none;
+	padding: 0;
+	margin: 0;
+}
+.space ul li {
+	padding-bottom: 10px;
+	color: #7792aa;
+	font-size: 0.94em;
+    line-height: 1.4em;
+}
+
+.space ul li i {
+	color: #2aabd2;
+	margin-right: 10px;
+	/*text-shadow: -1px 1px 0px rgba(0,0,0,0.5);*/
+}
+
+.citiesList li i {
+	color: #2aabd2;
+	margin-right: 10px;
+}
+
+
+
+/*#FCB22B orange from odesk 
+	#D26911 bottom orange line from gitHub
+	#dd4b39 google red
+*/

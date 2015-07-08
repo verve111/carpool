@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Вход в систему carPoputi (авто попутчик)</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Вход в систему">
+<meta name="keywords" content="login, carpoputi, авто попутчик, попутное авто, поиск попутки, ищу попутку, carpool, подвезти на машине">
+<meta name="author" content="Pipolo solutions">
+
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+<link href="assets/css/custom.css" rel="stylesheet">
+<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="assets/ico/favicon.ico">
+  
+</head>
+
+<body>
+	<!-- facebook, vk -->
+	<div id="loginpageheader"></div>
+	<!-- Green header -->
+	<div class="row poputiHeader" style="margin:0px;">
+		<div class="col-lg-2 col-md-1">
+		</div>
+		<div class="col-md-8">
+			<img src="images/auto-poputchik.png" title="Авто попутчик" alt="Поиск авто попутчика" style="padding-top:8px;" width="260"></img>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+
+	<!-- navbar-fixed-top navbar-inverse-->
+	<nav class="navbar-default navbar " >
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-collapse">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<div class="navbar-collapse collapse">
+			<div class="row">
+				<div class="col-lg-1 col-md-0"></div>
+				<div class="col-lg-5 col-md-8">
+					<ul class="nav navbar-nav" id="mainTabBar">
+						<li id="liMainTab"><a href="#" class="menulink" rel="auto-poputchik.html">Главная</a></li>
+						<li id="liFound"><a href="#" class="menulink" rel="ishu-poputku.html">Поиск попутки</a></li>								
+						<li id="liVoditel" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Водителю <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="menulink" rel="podvezti-na-mashine.html">Зарегистрировать поездку</a></li>
+								<li><a href="#" class="menulink" rel="carpool.html">Мои поездки</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-5 col-md-4">
+					<ul class="nav navbar-nav pull-right">
+						<li id="liEnter" style="display:none;" class="custom-active"><a href="#" class="menulink navbar-link" rel="loginpage.html"> <i class='glyphicon glyphicon-user'></i>&nbsp;&nbsp;Войти</a></li>
+						<li id="liLogout"style="display:none;"><a href="#" class="menulink navbar-link" rel="auto-poputchik.html?logout=1" title="Выйти из системы">Выход <i class="glyphicon glyphicon-log-out"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-lg-1 col-md-0"></div>
+			</div>
+		</div>
+	</nav>	
+<!--------- Main body --------------->	
+	<div class="container" id="foundRoutesTab">
+		<div class="jumbotron">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title">Вход в систему</h2>
+				</div>
+				<div class="panel-body">
+					<p id='addInfo' style='display:none;'><strong>Для совершения данного действия необходимо войти в систему.</strong></p>
+					<p>Пожалуйста, выберите одну из социальных сетей чтобы войти:<p>
+					<div id='uLogin' data-ulogin='display=panel;fields=first_name,last_name,photo;providers=vkontakte,mailru,facebook,google,odnoklassniki;hidden=;redirect_uri=;callback=loginCallback;'></div>
+					<div style="margin-top:40px;" class="alert alert-info col-md-6 col-sm-12 col-xs-12"><strong>Вход через социальную сеть абсолютно безопасен.</strong> Наша система не сможет:
+						<ul>
+							<li>узнать ваш логин/пароль</li>
+							<li>изменить ваш профиль</li>
+							<li>отправлять сообщения за вас и т.д.</li>
+						</ul>
+					</div>
+				</div>
+			</div>	
+			<!-- Для совершения данного действия необходимо осуществить вход -->
+			<div style="padding-bottom: 60px;">
+				<a href="auto-poputchik.html" title="Перейти на главную страницу">&laquo; На главную страницу</a>
+			</div>					
+		</div>
+		<hr>
+		<footer id="loginpagefooter">
+		</footer>
+	</div>
+	
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/js/login.js"></script>
+	<script src="http://www.ulogin.ru/js/ulogin.js"></script>
+ 	<script src="assets/js/jquery-1.10.1.min.js"></script>
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+ 	<script src="assets/js/jquery.ui.datepicker-ru.js"></script>
+ 	<script src="assets/js/bootstrap.min.js"></script>
+ 	<script src="assets/js/main.js"></script>
+	<script>
+  		$("div#loginpageheader").load("html/header.html"); 
+  		$("footer#loginpagefooter").load("html/footer.html");
+	</script> 
+	<script type="text/javascript">
+		var redirectPage = ''; 
+		function loginCallback(token) {
+			$.getJSON("http://ulogin.ru/token.php?token=" + token + "&callback=?", function(data) {
+				data = $.parseJSON(data.toString());
+				if (!data.error) {
+					// vk: uid 14003, identity http://vk.com/id14003
+					// odnoklassniki: same as vk
+					// mail.ru: uid 123456, identity http://my.mail.ru/mail/verve/
+					// facebook: uid 123456, identity http://www.facebook.com/stanlymainly
+					var userName = data.first_name;// + ' ' + data.last_name;
+					setCookie("poputiUserName", userName, 1);
+					setCookie("poputiUserIdetity", data.identity, 1);
+					setCookie("poputiUserPhotoUrl", data.photo, 1);
+					// there're 2 login windows created, that's why here replace and later history(-1)
+					window.location.replace(redirectPage == '' ? 'auto-poputchik.html?login=1' : redirectPage);
+				}
+			});
+		}
+		$(document).ready(function() {
+			if (isLoggedIn()) {
+				// On backspace for example on detailed route page.
+				// There're 2 login windows created, that's why upper replace and here history(-1)				
+				history.go(-1);
+			}
+			var params = getQueryParams(document.location.search);
+			if (params.route_id) {
+				// detailed route request
+				$('#addInfo').show();
+				redirectPage = 'show-route.html?route_id=' + params.route_id;
+			} else if (params.form_type && (params.form_type == 'podvezti-na-mashine' || params.form_type == 'carpool')) {
+				$('#addInfo').show();
+				redirectPage = params.form_type + '.html';
+			}
+		})
+	</script>
+</body>
+</html>				

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Информация о поездке. CarPoputi (авто попутчик)</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Поездка, детальная информация">
+<meta name="keywords" content="информация о поездке, carpoputi, авто попутчик, попутное авто, поиск попутки, ищу попутку, carpool, подвезти на машине">
+<meta name="author" content="Pipolo solutions">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+<link href="assets/css/custom.css" rel="stylesheet">
+<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="assets/ico/favicon.ico">
+</head>
+
+<body>
+	<!-- facebook, vk -->
+	<div id="pageheaderid"></div>
+	<!-- Green header -->
+	<div class="row poputiHeader" style="margin:0px;">
+		<div class="col-lg-2 col-md-1">
+		</div>
+		<div class="col-md-8">
+			<img src="images/auto-poputchik.png" title="Авто попутчик" alt="Поиск авто попутчика" style="padding-top:8px;" width="260"></img>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+	<!-- navbar-fixed-top navbar-inverse-->
+	<nav class="navbar-default navbar " >
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-collapse">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<div class="navbar-collapse collapse">
+			<div class="row">
+				<div class="col-lg-1 col-md-0"></div>
+				<div class="col-lg-5 col-md-8">
+					<ul class="nav navbar-nav" id="mainTabBar">
+						<li id="liMainTab"><a href="#" class="menulink" rel="auto-poputchik.html">Главная</a></li>
+						<li id="liFound"><a href="#" class="menulink" rel="ishu-poputku.html">Поиск попутки</a></li>								
+						<li id="liVoditel" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Водителю <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="menulink" rel="podvezti-na-mashine.html">Зарегистрировать поездку</a></li>
+								<li><a href="#" class="menulink" rel="carpool.html">Мои поездки</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-5 col-md-4">
+					<ul class="nav navbar-nav pull-right">
+						<li id="liEnter" style="display:none;"><a href="#" class="menulink navbar-link" rel="loginpage.html"> <i class='glyphicon glyphicon-user'></i>&nbsp;&nbsp;Войти</a></li>
+						<li id="liLogout"style="display:none;"><a href="#" class="menulink navbar-link" rel="auto-poputchik.html?logout=1" title="Выйти из системы">Выход <i class="glyphicon glyphicon-log-out"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-lg-1 col-md-0"></div>
+			</div>
+		</div>
+	</nav>		
+<!--------- Main body --------------->	
+	<div class="container">
+		<div class="jumbotron">
+			<div class="panel panel-default otkudaKudaBack">
+				<div class="panel-heading">
+					<h2 class="panel-title">Информация о поездке</h2>
+				</div>
+				<div class="panel-body" id="panelbody">
+				</div>
+			</div>	
+			<div style="padding-bottom: 60px;">
+				<a href="#" onclick="history.go(-1);return false;" title="На предыдущую страницу">&laquo; На предыдущую страницу</a>
+				<a href="auto-poputchik.html" style="display:none;" title="Перейти на главную страницу">&laquo; На главную страницу</a>
+			</div>					
+		</div>
+		<hr>
+		<footer id="pagefooterid">
+		</footer>
+	</div>
+	
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/js/jquery-1.10.1.min.js"></script>
+	<script src="assets/js/login.js"></script>
+	<script>
+  		$("div#pageheaderid").load("html/header.html"); 
+  		$("footer#pagefooterid").load("html/footer.html");
+	</script> 
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="assets/js/jquery.ui.datepicker-ru.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var params = getQueryParams(document.location.search);
+			if (params.route_id && isLoggedIn()) {
+				showProgress();
+				$.ajax({
+					url : "get.route.detailshtml.json",
+					data : {
+						routeId : params.route_id
+					},
+					success : function(res) {
+						hideProgress();
+						if (res == 'not_logged_in') {
+							window.location.href = 'auto-poputchik.html';
+						} else {				
+							$('#panelbody').append(res);
+						}
+					}
+				});
+			} else if (params.route_id) {
+				window.location.href = 'loginpage.html?route_id=' + params.route_id;
+			} else {
+				window.location.href = 'auto-poputchik.html';
+			}
+		})
+	</script>
+</body>
+</html>				

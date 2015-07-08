@@ -1,0 +1,120 @@
+<div class="panel panel-default otkudaKudaBack">
+	<form id="foundRoutesForm">
+		<fieldset>
+			<div class="form-group col-md-4">
+				<label for="foundComboFrom" class="control-label ">Откуда</label>
+				<select class="form-control" id="foundComboFrom"
+					name="foundComboFrom">
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="foundComboTo" class="control-label ">Куда</label>
+				<select class="form-control" id="foundComboTo"
+					name="foundComboTo">
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label for="foundDatepicker" class="control-label ">Дата</label>
+				<input id="foundDatepicker" name="foundDatepicker" type="text" class="date-picker form-control" placeholder="Клик для выбора">
+				&nbsp;&nbsp;<span style="font-size: 15px; color: #6a7480;">
+					<input type="checkbox" checked id="found3daysChk"> +/- 3 дня
+				</span>
+			</div>
+		</fieldset>
+		<fieldset>
+			<div class="form-group col-md-12">
+				<button type="submit" id="lookFor"
+					class="btn btn-success btn-large">Найти попутку &raquo;</button>
+			</div>
+		</fieldset>
+	</form>
+</div>
+		
+<div class="panel panel-default" id="searchResultPanel" style="display: none;">
+	<div class="panel-heading">
+		<h2 class="panel-title">Список найденных поездок</h2>
+	</div>
+	<div class="table-responsive" style="margin: 5px 0px;">
+		<table class="table table-bordered table-striped table-hover table-condensed" id="foundTable">
+			<thead>
+				<tr>
+					<!-- <th>Дата создания</th> -->
+					<th>Из</th>
+					<th>Через</th>
+					<th>В</th>
+					<th>Дата отъезда</th>
+					<!-- <th>Эл.почта</th>
+					<th>Тел.</th> -->
+					<th>Кол-во мест</th>
+					<th style="text-align:center">Цена за место</th>
+					<th style="text-align:center">Узнать</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		//cities list load
+		initCombos('#foundComboFrom, #foundComboTo');
+		
+		//connectCombos('#foundComboFrom', '#foundComboTo', '#foundDatepicker', '#found3daysChk');
+		
+		/*var params = getQueryParams(document.location.search);
+		if (params.issubmit) {
+			findRoutes($('#foundComboFrom').val(), $('#foundComboTo').val(), $('#foundDatepicker').val(), $('#found3daysChk').prop('checked'));
+		}*/
+		$('#foundDatepicker').datepicker({onSelect : function() { /* reset validation */ $(this).valid(); }});
+		
+		// validation
+	    $('#foundRoutesForm input[type="text"], #foundRoutesForm select').tooltipster({
+	        trigger: 'custom',
+	        onlyOne: false,
+	        position: 'bottom',
+	        theme: '.tooltipster-custom-theme'
+	    });
+		
+		jQuery.validator.addMethod("compareCities", function(value, element, params) {
+			return value != $("#foundComboFrom").val();
+		}, jQuery.validator.format("Пункт отправления и пункт прибытия должны быть различны"));
+		
+		$("#foundRoutesForm").validate({
+			submitHandler : function() {
+				findRoutes($('#foundComboFrom').val(), $('#foundComboTo').val(), $('#foundDatepicker').val(), $('#found3daysChk').prop('checked'));
+			},
+			showErrors : function(errorMap, errorList) {
+				animateValidationErrors(this, errorList);
+			},
+			rules : {
+				foundComboFrom : {
+					required : true
+				},
+				foundComboTo : {
+					required : true,
+					compareCities : true
+				},
+				foundDatepicker : {
+					//datepicker valid() run in defaults onSelect
+					required : true
+				}
+			},
+			messages : {
+				foundComboFrom : {
+					required : 'Выберите город'
+				},
+				foundComboTo : {
+					required : 'Выберите город'
+				},
+				foundDatepicker : {
+					required : 'Выберите дату'
+				}
+			}
+		});			
+	});
+</script>
+
+

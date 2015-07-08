@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Авто попутчик, подвезти на машине, ищу попутку, carpool, автостоп по россии</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Поиск авто, которое сможет вас подвезти из города А в город Б | Aвто попутчик | Подвезти на машине | ищу попутку | carpool">
+<meta name="keywords" content="авто попутчик, подвезти на машине, ищу попутку, carpool, автостоп по россии, по пути, авто попутчик, carpoputi, автостоп, авто, подвезти на машине, город, carpool, ищу попутку, Санкт-Петербург, Москва, Хельсинки, трансфер, Финляндия, транспорт">
+<meta name="author" content="Pipolo solutions">
+
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
+<link href="assets/css/custom.css" rel="stylesheet">
+<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="assets/css/tooltipster.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="assets/ico/favicon.ico">
+</head>
+
+<body>
+	<div id="routeSuccesToast" class="successToast" style="display:none;"></div>
+
+	<!-- facebook, vk -->
+	<div id="mainpageheader"></div>
+	
+	<!-- Green header -->
+	<div class="row poputiHeader" style="margin:0px;">
+		<div class="col-lg-2 col-md-1">
+		</div>
+		<div class="col-md-8">
+			<img src="images/auto-poputchik.png" title="Авто попутчик" alt="Поиск авто попутчика" style="padding-top:8px;" width="260"></img>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+
+	<!-- navbar-fixed-top navbar-inverse-->
+	<nav class="navbar-default navbar " >
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+			data-target=".navbar-collapse">
+			<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+		</button>
+		<div class="navbar-collapse collapse">
+			<div class="row">
+				<div class="col-lg-1 col-md-0"></div>
+				<div class="col-lg-5 col-md-8">
+					<ul class="nav navbar-nav" id="mainTabBar">
+						<li id="liMainTab" class="custom-active"><a href="#" class="menulink" rel="auto-poputchik.html">Главная</a></li>
+						<li id="liFound"><a href="#" class="menulink" rel="ishu-poputku.html">Поиск попутки</a></li>								
+						<li id="liVoditel" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Водителю <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="menulink" rel="podvezti-na-mashine.html">Зарегистрировать поездку</a></li>
+								<li><a href="#" class="menulink" rel="carpool.html">Мои поездки</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-5 col-md-4">
+					<ul class="nav navbar-nav pull-right">
+						<li id="liEnter" style="display:none;"><a href="#" class="menulink navbar-link" rel="loginpage.html"><i class='glyphicon glyphicon-user'></i>&nbsp;&nbsp;Войти</a></li>
+						<li id="liLogout"style="display:none;"><a href="#" class="menulink navbar-link" rel="auto-poputchik.html?logout=1" title="Выйти из системы">Выход <i class="glyphicon glyphicon-log-out"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-lg-1 col-md-0"></div>
+			</div>
+		</div>
+	</nav>	
+<!--------- Main body --------------->
+	<div class="container">
+		<!--[if IE]>
+			<div class="alert alert-danger"><h4><strong>Внимание.</strong> Данный ресурс не предназначен для просмотра через браузер Internet Explorer. Пожалуйста, используйте другой браузер (Chrome, Firefox, Safari, ...).</h4></div>
+		<![endif]-->
+		<![if !IE]>
+		   <noscript>
+		   <div class="alert alert-danger"><h4><strong>Внимание.</strong> Для работы с данным ресурсом необходимо включить исполнение JavaScript в настройках браузера. Это очень важно.</h4></div>
+		   </noscript>
+		<![endif]>
+
+		<div class="jumbotron">
+			<div class="tab-content">
+<!--------- 1st tab ----------------->				
+				<div class="tab-pane active" id="mainTab">
+					<div class="row">
+						<div class="col-md-6">
+							<h1 style="margin: 0; padding: 0px 0px 25px 0px;">
+								<strong>carPoputi -</strong> поиск авто попутчика, который сможет вас подвезти из города А в город Б <a href="auto-poputchik-about.html" style="color: #2aabd2;">&nbsp;подробнее&raquo;</a>
+							</h1>
+							<div id='mobilenotify' style="font-size: 16px; line-height: 1em; padding: 2px; display:none;" class="alert alert-info"></div>
+						</div>
+						<div class="col-md-6">
+							<div id="userPicDiv" style="color:#7C7C7C; font-weight:bold;padding:5px;" class="pull-right"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-default otkudaKudaBack">
+								<div class="panel-heading">
+									<h3 class="panel-title">Поиск попутки</h3>
+								</div>
+								<form id="mainPageForm" class="form-horizontal">
+									<fieldset>
+										<div class="form-group marginTop40">
+											<label for="comboFrom"
+												class="col-md-4 control-label fontColorGrey">Откуда</label>
+											<div class="col-md-7">
+												<select class="form-control" id="comboFrom" name="comboFrom">
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="comboTo"
+												class="col-md-4 control-label fontColorGrey">Куда</label>
+											<div class="col-md-7">
+												<select class="form-control" id="comboTo" name="comboTo">
+												</select>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="datepicker"
+												class="col-md-4 control-label fontColorGrey">Дата</label>
+											<div class="col-md-5">
+												<div class="input-group">
+													<input type="text" id="datepicker" name="datepicker"
+														class="form-control" placeholder="Клик для выбора">
+													&nbsp;&nbsp;<span style="font-size:15px;color:#6a7480;">
+															<input type="checkbox" checked id="3daysChk"> +/- 3 дня</input>
+														</span>
+												</div>
+
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-md-4"></div>
+											<div class="col-md-6">
+												<button type="submit" id="lookFor"
+													class="btn btn-success btn-large">Найти попутку &raquo;</button>
+											</div>
+										</div>
+
+									</fieldset>
+								</form>
+							</div>
+							<div class="panel panel-default" id="recentResultPanel" style="display: none;">
+								<div class="panel-heading">
+									<h2 class="panel-title">Недавно зарегистрированные поездки</h2>
+								</div>
+								<div class="table-responsive" style="margin: 5px 0px;">
+									<table class="table table-bordered table-striped table-hover table-condensed" id="recentTable">
+										<thead>
+											<tr>
+												<!-- <th>Дата создания</th> -->
+												<th>Из</th>
+												<th>В</th>
+												<th>Дата отъезда</th>
+												<th style="text-align:center">Узнать</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>							
+						</div>
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-lg-6 col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h3 class="panel-title">Водителю</h3>
+										</div>
+										<div class="panel-body">
+											<!-- <p>
+												<span class="lightGrey"><strong>Водителю.</strong></span> Если
+												у вас есть авто и вы хотите найти пассажиров, то 
+											</p>-->
+											
+											<div class="space">
+												<ul>
+													<li><i class="glyphicon glyphicon-usd"></i>Получайте доход за провоз пассажиров.</li>
+													<li><i class="glyphicon glyphicon-search"></i>100 и более потенциальных пассажиров смогут найти вашу поездку.</li>
+												</ul>
+											</div>
+											<div style="text-align:center;" >
+												<button class="btn btn-info btn-xs" onclick="window.location.href='podvezti-na-mashine.html'">
+													Создать поездку &raquo;
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<p><span class="lightGrey"><strong>Новости</strong></span></p>
+											<p style="font-size:0.94em; color: #7792aa;">22 октября. Добавлена возможность поездки Россия - Финляндия (
+		      									<img src="images/finland_flag3.png" alt="Финляндия флаг, Хельсинки"></img> )</p>
+		      								<p style="font-size:0.94em;"><a href="poputchiki-v-finlandiu.html" title="Попутчики в Финляндию">Попутчики в Финляндию &raquo;</a></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Фотографии из путешествий наших участников</h3>
+								</div>
+								<div id="customCarousel" class="carousel slide marginTop40_2">
+									<div class="carousel-inner">
+										<div class="active item">
+											<img src="images/spb1.jpg" alt="Охтинский мост, Санкт-Петербург"></img>
+											<div class="carousel-caption">
+												<h4>Санкт-Петербург: Охтинский мост</h4>
+											</div>
+										</div>
+										<div class="item">
+											<img src="images/hels1.jpg" alt="Хельсинки, вокзал, по пути"></img>
+											<div class="carousel-caption">
+												<h4>Хельсинки: Центральный вокзал</h4>
+											</div>
+										</div>
+										<div class="item">
+											<img src="images/mos1.jpg" alt="Москва попутчик"></img>
+											<div class="carousel-caption">
+												<h4>Москва: Храм Василия Блаженного</h4>
+											</div>
+										</div>																			
+										<div class="item">
+											<img src="images/spb2.jpg" alt="Исакиевский собор, Санкт-Петербург"></img>
+											<div class="carousel-caption">
+												<h4>Санкт-Петербург: Вид на Исакиевский собор</h4>
+											</div>
+										</div>
+									</div>
+									<a class="carousel-control left" href="#customCarousel"
+										data-slide="prev">&lsaquo;</a> <a
+										class="carousel-control right" href="#customCarousel"
+										data-slide="next">&rsaquo;</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+<!--------- 2nd tab ----------------->				
+
+<!--------- 3d tab ----------------->		
+
+<!--------- 4th tab ----------------->
+
+<!--------- 5th tab Cities list ----------------->		
+				<div id="citiesListDiv" style="display:none;">
+					<ul class='citiesList' style='list-style:none;columns: 2;-webkit-columns: 2;-mox-columns: 2;'>
+						<li><i class="glyphicon glyphicon-ok"></i>Архангельск</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-belgorod.html" title="Попутчики Белгород">Белгород</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Брянск</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Великие Луки</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Великий Новгород</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Владимир</li>	
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-iz-volgograda.html" title="Попутчики из Волгограда">Волгоград</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchik-vologda.html" title="Попутчик Вологда">Вологда</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-voronej.html" title="Попутчики Воронеж">Воронеж</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Выборг</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Гатчина</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/isshu-poputchika-iz-ekaterinburga.html" title="Екатринбург">Екатринбург</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchik-ivanovo.html" title="Попутчик Иваново">Иваново</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Ижевск</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Иматра</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-kazan.html" title="Попутчики Казань">Казань</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Калуга</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-kiev.html" title="Попутчики Киев">Киев</a></li>						
+						<li><i class="glyphicon glyphicon-ok"></i>Коломна</li>	
+						<li><i class="glyphicon glyphicon-ok"></i>Кострома</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Котка</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Краснодар</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Кудымкар</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-kursk.html" title="Попутчики Курск">Курск</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Люберцы</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poisk-poputchika-iz-minska.html" title="Попутчики Минск">Минск</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-v-moskvu.html" title="Попутчики Москва">Москва</a></li>	
+						<li><i class="glyphicon glyphicon-ok"></i>Набережные Челны</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchik-nizhnij-novgorod.html" title="Попутчики Нижний Новгород">Нижний Новгород</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Орел</li>	
+						<li><i class="glyphicon glyphicon-ok"></i>Пенза</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchik-perm.html" title="Попутчик Пермь">Пермь</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Подольск</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchik-pskov.html" title="Попутчик Псков">Псков</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Ржев</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Ростов-на-Дону</li>	
+						<li><i class="glyphicon glyphicon-ok"></i>Рязань</li>	
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-samara.html" title="Попутчики Самара">Самара</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/isshu-poputchika-iz-spb.html" title="Попутчики Санкт-Петербург">Санкт-Петербург</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Саранск</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Саратов</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Серпухов</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Сестрорецк</li>			
+						<li><i class="glyphicon glyphicon-ok"></i>Смоленск</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Тамбов</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Тверь</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Тольятти</li>
+						<li><i class="glyphicon glyphicon-ok"></i>Тула</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-ufa.html" title="Попутчики Уфа">Уфа</a></li>		
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/sankt-peterburg-helsinki-na-mashine.html" title="Попутчики Хельсинки">Хельсинки</a></li>			
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchik-cheboksary.html" title="Попутчик Чебоксары">Чебоксары</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchiki-chelyabinsk.html" title="Попутчики Челябинск">Челябинск</a></li>
+						<li><i class="glyphicon glyphicon-ok"></i>Череповец</li>
+						<li><i class="glyphicon glyphicon-ok"></i><a href="city/poputchik-yaroslavl.html" title="Попутчик Ярославль">Ярославль</a></li>
+					</ul>
+				</div>			
+<!--------- 6th tab Contact us form ----------------->				
+				<div class="modal" id="contactUsModal" tabindex="-1" >
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Связаться с нами</h4>
+							</div>
+							<div class="modal-body">
+								<form id="regRouteForm" class="form-horizontal">
+									<fieldset>
+										<div class="form-group marginTop40">
+											<label for="contactUsName"
+												class="col-md-3 control-label fontColorGrey">Ваше имя</label>
+											<div class="col-md-9">
+												<input type="text" maxlength="32" class="form-control"
+													id="contactUsName" name="contactUsName"> </input>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="contactUsEmail"
+												class="col-md-3 control-label fontColorGrey">Ваша эл.почта</label>
+											<div class="col-md-9">
+												<input type="text" maxlength="64" class="form-control"
+													id="contactUsEmail" name="contactUsEmail"> </input>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="contactUsMsg"
+												class="col-md-3 control-label fontColorGrey">Сообщение</label>
+											<div class="col-md-9">
+												<textarea id="contactUsMsg" class="form-control" rows="5"
+													maxlength="255"></textarea>
+											</div>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-warning" onclick="contactUsFunc();">Отправить сообщение</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!-- Bottom inside hero -->
+		<hr>
+		<div class="row">
+			<div class="col-md-4 text-center">
+				<div class="benefits"><i class="glyphicon glyphicon-thumbs-up benefits" style="background: #50DAF2;"></i></div>
+				<h3>Путешествуй выгодно</h3>
+				<p class="text-justify">Автотранспорт является более экономичной альтернативой таким традиционным
+				способам передвижения как Ж/Д- и Авиатранспорт.</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<div class="benefits"><i class="glyphicon glyphicon-map-marker benefits" style="background: #5AD048;"></i></div>
+				<h3>Выбирай лучшее</h3>
+				<p class="text-justify">Наша база данных постоянно пополняется, предоставляя возможность
+				выбора самых подходящих дат поездок, географических пунктов, удобств передвижений.</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<div class="benefits"><i class="glyphicon glyphicon-picture benefits" style="background: #FF8D19;"></i></div>
+				<h3>Открывай новое</h3>
+				<p class="text-justify">Новые места. Новые знакомства. Новые горизонты.</p>
+			</div>
+		</div>
+		
+		<div>
+			<br>
+			<span class='pull-right'>
+				<a href='#' id='citiesList' onclick='citiesListFunc();'>Список городов</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a href='#' data-toggle="modal" data-target="#contactUsModal">Связаться с нами</a>
+			</span>
+			<br>
+		</div>
+		
+		<hr>
+
+		<footer id="mainpagefooter">
+		</footer>
+
+	</div>
+	<!-- /container -->
+	
+
+
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/js/login.js"></script>
+	<script src="assets/js/jquery-1.10.1.min.js"></script>
+	<script>
+  		$("div#mainpageheader").load("html/header.html"); 
+  		$("footer#mainpagefooter").load("html/footer.html"); 
+	</script> 
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="assets/js/jquery.ui.datepicker-ru.js"></script>
+	<script src="assets/js/jquery.validate.min.js"></script>
+	<script src="assets/js/jquery.tooltipster.min.js"></script>
+	<!-- modal windows -->
+	<script src="assets/js/bootbox.min.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script>
+		$(document).ready(function() {
+			
+			var params = getQueryParams(document.location.search);
+			if (params.logout && isLoggedIn()) {
+				clearAllCookies();updateUserPicAndButtons();showToast('Вы вышли из системы.');
+			} else if (params.login && isLoggedIn()) {
+				showToast('Здравствуйте, ' +  getCookie("poputiUserName") + '. Вы успешно вошли в систему.');
+			}
+			
+			initCombos('#mainTab select');
+			connectCombos('#comboFrom', '#comboTo', '#datepicker', '#3daysChk');
+
+			// recent routes load
+			$.ajax({
+				url : "get.route.list.json",
+				data : {
+					tableType : "RECENT"
+				},
+				success : function(msg) {
+					if (msg != '') {
+						$('#recentTable > tbody:last').append(msg);
+						$('#recentResultPanel').show();
+					}
+				}
+			});	
+			
+		    $('#mainPageForm input[type="text"], #mainPageForm select').tooltipster({
+		        trigger: 'custom',
+		        onlyOne: false,
+		        position: 'bottom',
+		        theme: '.tooltipster-custom-theme'
+		    });
+		    
+			jQuery.validator.addMethod("compareCities", function(value, element, params) {
+				return value != $("#comboFrom").val();
+			}, jQuery.validator.format("Пункт отправления и пункт прибытия должны быть различны"));
+		    
+			$("#mainPageForm").validate({
+				submitHandler : function() {
+					window.location.href = 'ishu-poputku.html?issubmit=true';
+				},
+				showErrors : function(errorMap, errorList) {
+					animateValidationErrors(this, errorList);
+				},
+				rules : {
+					comboFrom : {
+						required : true
+					},
+					comboTo : {
+						required : true,
+						compareCities : true
+					},
+					datepicker : {
+						//datepicker valid() run in defaults onSelect
+						required : true
+					}
+				},
+				messages : {
+					comboTo : {
+						required : 'Выберите город'
+					},
+					comboFrom : {
+						required : 'Выберите город'
+					},
+					datepicker : {
+						required : 'Выберите дату'
+					}
+				}
+			});
+		})
+	</script>
+</body>
+</html>
